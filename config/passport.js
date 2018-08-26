@@ -1,6 +1,6 @@
-var passport = require('passport');
-var User = require('../models/user');
-var LocalStrategy = require('passport-local').Strategy;
+const passport = require('passport');
+const User = require('../models/user');
+const LocalStrategy = require('passport-local').Strategy;
 
 passport.serializeUser(function(user, done) {
     done(null, user.id);
@@ -20,9 +20,9 @@ passport.use('local.signup', new LocalStrategy({
     req.checkBody('email', 'Invalid email').notEmpty().isEmail();
     req.checkBody('password', 'Invalid password').notEmpty().isLength({ min: 4 });
 
-    var errors = req.validationErrors();
+    let errors = req.validationErrors();
     if (errors) {
-        var messages = [];
+        let messages = [];
         errors.forEach(function(error) {
             messages.push(error.msg);
         });
@@ -39,7 +39,7 @@ passport.use('local.signup', new LocalStrategy({
             return done(null, false, { message: 'Email is already in use.' });
         }
 
-        var newUser = new User();
+        let newUser = new User();
         newUser.email = email;
         newUser.password = newUser.encryptPassword(password);
         newUser.save(function(err, result) {
@@ -60,9 +60,9 @@ passport.use('local.signin', new LocalStrategy({
     req.checkBody('email', 'Invalid email').notEmpty().isEmail();
     req.checkBody('password', 'Invalid password').notEmpty().isLength({ min: 4 });
 
-    var errors = req.validationErrors();
+    let errors = req.validationErrors();
     if (errors) {
-        var messages = [];
+        let messages = [];
         errors.forEach(function(error) {
             messages.push(error.msg);
         });

@@ -1,10 +1,10 @@
-var Product = require('../models/product');
+const Product = require('../models/product');
 
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
 mongoose.connect('localhost:27017/shopping');
 
-var products = [
+const products = [
     new Product({
         imagePath: 'https://upload.wikimedia.org/wikipedia/en/5/5e/Gothiccover.png',
         title: 'Gothic Video Game',
@@ -37,8 +37,8 @@ var products = [
     })
 ];
 
-var done = 0;
-for (var i = 0; i < products.length; i++) {
+let done = 0;
+for (let i = 0; i < products.length; i++) {
     products[i].save(function(err, result) {
         done++;
         if (done === products.length) {
